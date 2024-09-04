@@ -3,7 +3,7 @@ const { Client } = require("pg");
 
 const SQL = `
 CREATE TABLE IF NOT EXISTS users (
-   user_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
    firstname VARCHAR ( 40 ) NOT NULL,
    lastname VARCHAR ( 72 ) NOT NULL,
    email VARCHAR ( 72 ) NOT NULL UNIQUE,
@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS messages (
    text VARCHAR ( 500 ) NOT NULL,
    CONSTRAINT fk_user
 	  FOREIGN KEY(user_id) 
-      REFERENCES users(user_id)
+      REFERENCES users(id)
 		  ON DELETE SET NULL
 );
 

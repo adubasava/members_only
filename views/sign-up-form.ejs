@@ -1,52 +1,26 @@
-﻿<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title></title>
-  </head>
-  <body>
-    <h1>Sign Up</h1>
-    <% if (locals.errorMessage!= null) { %> 
-      <div class="error-message">
-          <%= errorMessage %>
-      </div>    
-    <% } %>
-
-    <form action="/sign-up" method="POST">
-      <label for="firstname">First Name</label>
-      <input
-        id="firstname"
-        name="firstname"
-        placeholder="First name"
-        type="text"
-        required
-      />
-      <label for="lastname">Last Name</label>
-      <input
-        id="lastname"
-        name="lastname"
-        placeholder="Last name"
-        type="text"
-        required
-      />
-      <label for="email">Email</label>
-      <input
-        id="email"
-        name="email"
-        placeholder="Email"
-        type="email"
-        required
-      />
-      <label for="password">Password</label>
-      <input id="password" name="password" type="password" required />
-      <label for="passwordConfirmation">Confirm Password</label>
-      <input
-        id="passwordConfirmation"
-        name="passwordConfirmation"
-        type="password"
-        required
-      />
-      <button>Sign Up</button>
-    </form>
-  </body>
-</html>
+﻿<h1>Sign Up</h1>
+<form action="/sign-up" method="POST">
+  <label for="firstname">First Name</label>
+  <input id="firstname" name="firstname" type="text" required />
+  <label for="lastname">Last Name</label>
+  <input id="lastname" name="lastname" type="text" required />
+  <label for="email">Email</label>
+  <input autocomplete="email" id="email" name="email" type="email" required />
+  <label for="password">Password</label>
+  <input
+    autocomplete="new-password"
+    id="password"
+    name="password"
+    type="password"
+    required
+  />
+  <label for="passwordConfirmation">Confirm Password</label>
+  <input
+    autocomplete="new-password"
+    id="passwordConfirmation"
+    name="passwordConfirmation"
+    type="password"
+    required
+  />
+  <button>Sign Up</button>
+</form>

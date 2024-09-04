@@ -2,8 +2,9 @@ const express = require("express");
 const router = express.Router();
 const { body } = require("express-validator");
 const db = require("../db/queries");
+const passport = require("passport");
 
-const userController = require("../controllers/userController");
+const mainController = require("../controllers/mainController");
 
 const alphaErr = "must only contain letters and hyphens!";
 
@@ -36,6 +37,18 @@ const validateUser = [
     }),
 ];
 
-router.post("/sign-up", [validateUser], userController.register);
+const check = passport.authenticate("local", {
+  failureRedirect: "/log-in",
+  failureMessage: true,
+});
+
+router.get("/", mainController.renderIndexPage);
+router.get("/sign-up", mainController.renderRegisterForm);
+router.post("/sign-up", [validateUser], mainController.register);
+
+router.get("/log-in", mainController.renderLoginForm);
+router.post("/log-in", [check], mainController.login);
+
+router.get("/log-out", mainController.logout);
 
 module.exports = router;

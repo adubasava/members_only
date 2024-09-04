@@ -13,9 +13,11 @@
   "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "connect-pg-simple": "^9.0.1",
     "dotenv": "^16.4.5",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.18.0",
     "express-validator": "^7.2.0",
     "nodemon": "^3.1.4",
