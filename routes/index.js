@@ -1,12 +1,41 @@
 const express = require("express");
 const router = express.Router();
-const messageController = require("../controllers/messageController");
+const { body } = require("express-validator");
+const db = require("../db/queries");
 
-router.get("/", messageController.getMessages);
+const userController = require("../controllers/userController");
 
-router.get("/new", messageController.renderForm);
-router.post("/new", messageController.addNewMessage);
+const alphaErr = "must only contain letters and hyphens!";
 
-router.get("/message/:id", messageController.renderMessage);
+const validateUser = [
+  body("firstname")
+    .trim()
+    .isAlpha("en-US", { ignore: "-" })
+    .withMessage(`First name ${alphaErr}`),
+  body("lastname")
+    .trim()
+    .isAlpha("en-US", { ignore: "-" })
+    .withMessage(`Last name ${alphaErr}`),
+  body("email").custom(async (value) => {
+    const user = await db.findUserByEmail(value);
+    if (user.length > 0) {
+      throw new Error("E-mail already in use");
+    }
+  }),
+  body("password")
+    .trim()
+    .isLength({ min: 5 })
+    .withMessage(`The password must be at least 5 characters long`),
+  body("passwordConfirmation")
+    .trim()
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Passwords do not match");
+      }
+      return value === req.body.password;
+    }),
+];
+
+router.post("/sign-up", [validateUser], userController.register);
 
 module.exports = router;

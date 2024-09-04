@@ -12,11 +12,15 @@ const pool = new Pool({
 });
 
 const app = express();
+
+const indexRouter = require("./routes/index");
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(session({ secret: "cats", resave: false, saveUninitialized: false }));
 app.use(passport.session());
+
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
@@ -25,18 +29,7 @@ app.get("/", (req, res) => {
 
 app.get("/sign-up", (req, res) => res.render("sign-up-form"));
 
-app.post("/sign-up", async (req, res, next) => {
-  try {
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    await pool.query("INSERT INTO users (username, password) VALUES ($1, $2)", [
-      req.body.username,
-      hashedPassword,
-    ]);
-    res.redirect("/");
-  } catch (err) {
-    return next(err);
-  }
-});
+app.post("/sign-up", indexRouter);
 
 passport.use(
   new LocalStrategy(async (username, password, done) => {
@@ -97,4 +90,6 @@ app.get("/log-out", (req, res, next) => {
   });
 });
 
-app.listen(3000, () => console.log("app listening on port 3000!"));
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => console.log("app listening on port 3000!"));

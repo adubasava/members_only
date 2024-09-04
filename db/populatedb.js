@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
    user_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
    firstname VARCHAR ( 40 ) NOT NULL,
    lastname VARCHAR ( 72 ) NOT NULL,
-   username VARCHAR ( 72 ) NOT NULL,
+   email VARCHAR ( 72 ) NOT NULL UNIQUE,
    password VARCHAR ( 255 ) NOT NULL,
    status BOOLEAN DEFAULT 'False'
 );
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS messages (
 		  ON DELETE SET NULL
 );
 
-INSERT INTO users (firstname, lastname, username, password) 
+INSERT INTO users (firstname, lastname, email, password) 
 VALUES
   ('John', 'Doe', 'john@mail.com', '123'),
   ('Mary', 'Poppins', 'mary@mail.com', '123'),
