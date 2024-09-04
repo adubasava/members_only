@@ -1,0 +1,24 @@
+﻿<!doctype html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <div class="board">
+      <h1><%= title %></h1>
+
+      <div class="details-container">
+        <div class="message">
+          <h3 class="user"><%= message[0].username %>' message</h3>
+          <p><b>Text</b>: <%= message[0].text %></p>
+          <div class="date">
+            <i>Posted on</i>: <%= message[0].added.toLocaleString() %>
+          </div>
+
+          <div class="back"><a href="/">Back to Messages</a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

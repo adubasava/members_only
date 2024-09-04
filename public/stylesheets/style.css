@@ -1,0 +1,103 @@
+body {
+  padding: 50px;
+  font:
+    14px "Lucida Grande",
+    Helvetica,
+    Arial,
+    sans-serif;
+  background-color: rgba(162, 211, 241, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.board {
+  background-color: rgb(162, 211, 241);
+  padding: 30px;
+  border-radius: 12px;
+  width: max-content;
+}
+
+.add {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.message-container {
+  background-color: aliceblue;
+  padding: 3px 10px 5px 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+.details-container {
+  background-color: aliceblue;
+  padding: 3px 10px 5px 10px;
+  gap: 20px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+.back {
+  margin-top: 50px;
+}
+
+a {
+  color: white;
+  background-color: #00b7ff;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+}
+
+a:hover {
+  color: #00b7ff;
+  background-color: white;
+  border: 1px solid black;
+}
+
+.message {
+  padding: 3px 10px 5px 10px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+}
+
+.user {
+  margin-bottom: 3px;
+}
+
+.date {
+  color: rgb(68, 65, 65);
+}
+
+.submit {
+  border: 1px solid black;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: yellowgreen;
+  padding: 8px 12px;
+}
+
+#user {
+  width: 40%;
+}
+
+#message {
+  width: 90%;
+}
+
+input:focus {
+  outline: none;
+}
+
+input {
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 4px;
+  height: 30px;
+  padding: 5px 10px;
+}
