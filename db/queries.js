@@ -1,4 +1,5 @@
-﻿const pool = require("./pool");
+﻿const e = require("express");
+const pool = require("./pool");
 
 async function findUserByEmail(email) {
   const { rows } = await pool.query("SELECT * FROM users WHERE email = $1", [
@@ -7,16 +8,18 @@ async function findUserByEmail(email) {
   return rows;
 }
 
-async function findUserById(id) {
-  const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
-  return rows;
-}
-
 async function createUser(firstname, lastname, email, isadmin, password) {
-  await pool.query(
-    "INSERT INTO users (firstname, lastname, email, is_admin, password) VALUES ($1, $2, $3, $4, $5)",
-    [firstname, lastname, email, isadmin, password],
-  );
+  if (isadmin) {
+    await pool.query(
+      "INSERT INTO users (firstname, lastname, email, status, is_admin, password) VALUES ($1, $2, $3, $4, $5, $6)",
+      [firstname, lastname, email, "True", isadmin, password],
+    );
+  } else {
+    await pool.query(
+      "INSERT INTO users (firstname, lastname, email, password) VALUES ($1, $2, $3, $4)",
+      [firstname, lastname, email, password],
+    );
+  }
 }
 
 async function updateUserStatus(id) {
@@ -30,31 +33,22 @@ async function getAllMessages() {
   return rows;
 }
 
-async function getMessageById(messageId) {
-  const { rows } = await pool.query("SELECT * FROM messages WHERE id = $1", [
-    messageId,
-  ]);
-  return rows;
-}
-
 async function removeMessage(messageId) {
   await pool.query("DELETE FROM messages WHERE message_id = $1", [messageId]);
 }
 
-async function addMessage(text, username) {
-  await pool.query("INSERT INTO messages (text, username) VALUES ($1, $2)", [
-    text,
-    username,
-  ]);
+async function addMessage(user_id, title, text) {
+  await pool.query(
+    "INSERT INTO messages (user_id, title, text) VALUES ($1, $2, $3)",
+    [user_id, title, text],
+  );
 }
 
 module.exports = {
   findUserByEmail,
-  findUserById,
   createUser,
   updateUserStatus,
   getAllMessages,
   addMessage,
-  getMessageById,
   removeMessage,
 };

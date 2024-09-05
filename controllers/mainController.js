@@ -1,7 +1,6 @@
 ﻿const bcrypt = require("bcryptjs");
 const db = require("../db/queries");
 const { validationResult } = require("express-validator");
-const passport = require("passport");
 const myValidationResult = validationResult.withDefaults({
   formatter: (error) => error.msg,
 });

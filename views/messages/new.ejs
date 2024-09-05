@@ -1,0 +1,10 @@
+﻿<div class="board">
+  <p>New message form</p>
+  <form method="POST" action="/messages/new">
+    <label for="title">Title: </label><br />
+    <input id="title" type="text" name="title" value="<%= title %>" /><br />
+    <label for="text">Text: </label><br />
+    <input id="text" type="text" name="text" value="<%= text %>" /><br />
+    <button class="submit" type="submit">Submit</button>
+  </form>
+</div>

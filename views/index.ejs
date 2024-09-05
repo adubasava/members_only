@@ -1,6 +1,6 @@
 <% if (user) {%>
     <h1>WELCOME BACK <%= user.firstname %> <%= user.lastname %></h1>
-    <a href="/log-out">Create a New Message</a>
+    <a href="/messages/new">Create a New Message</a>
     <a href="/log-out">LOG OUT</a>
   <% } else { %>
     <h1>please log in</h1>  

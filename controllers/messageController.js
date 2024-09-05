@@ -1,27 +1,35 @@
-﻿const db = require("../db/queries");
-
-async function getMessages(req, res) {
-  const messages = await db.getAllMessages();
-  res.render("index", { title: "Mini Messageboard", messages: messages });
-}
+﻿const bcrypt = require("bcryptjs");
+const db = require("../db/queries");
+const { validationResult } = require("express-validator");
+const myValidationResult = validationResult.withDefaults({
+  formatter: (error) => error.msg,
+});
 
 async function renderForm(req, res) {
-  res.render("form", { title: "Mini Messageboard" });
-}
-
-async function renderMessage(req, res) {
-  const messageId = parseInt(req.params.id) + 1;
-  const message = await db.getMessageById(messageId);
-  res.render("message", {
-    title: "Mini Messageboard",
-    message: message,
-  });
+  res.render("messages/new", { title: "", text: "" });
 }
 
 async function addNewMessage(req, res) {
-  const { messageText, messageUser } = req.body;
-  await db.addMessage(messageText, messageUser);
-  res.redirect("/");
+  const messages = await db.getAllMessages();
+  const { title, text } = req.body;
+  const errors = myValidationResult(req).array();
+  if (errors.length > 0) {
+    return res.render("messages/new", {
+      errorMessage: errors.join(" "),
+      title: title,
+      text: text,
+    });
+  }
+  try {
+    await db.addMessage(req.user.id, title, text);
+    res.redirect("/");
+  } catch {
+    res.render("index", {
+      messages: messages,
+      user: req.user,
+      errorMessage: "Error adding Message",
+    });
+  }
 }
 
 async function deleteMessage(req, res) {
@@ -29,7 +37,6 @@ async function deleteMessage(req, res) {
   const messages = await db.getAllMessages();
   try {
     await db.removeMessage(messageId);
-    //res.redirect("/");
     res.render("index", {
       user: req.user,
       messages: messages,
@@ -44,9 +51,7 @@ async function deleteMessage(req, res) {
 }
 
 module.exports = {
-  getMessages,
   addNewMessage,
   renderForm,
-  renderMessage,
   deleteMessage,
 };
