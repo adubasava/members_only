@@ -22,6 +22,8 @@ async function updateMembership(req, res) {
   } else {
     res.render("login", {
       errorMessage: "Login first!",
+      email: "",
+      password: "",
     });
   }
 }

@@ -7,7 +7,12 @@ const myValidationResult = validationResult.withDefaults({
 });
 
 async function renderIndexPage(req, res) {
-  res.render("index", { user: req.user });
+  try {
+    const messages = await db.getAllMessages();
+    res.render("index", { user: req.user, messages: messages });
+  } catch {
+    res.redirect("/");
+  }
 }
 
 async function renderRegisterForm(req, res) {
@@ -49,7 +54,7 @@ async function renderLoginForm(req, res, next) {
 }
 
 async function login(req, res) {
-  res.render("index", { user: req.user });
+  res.redirect("/");
 }
 
 async function logout(req, res, next) {

@@ -24,7 +24,9 @@ async function updateUserStatus(id) {
 }
 
 async function getAllMessages() {
-  const { rows } = await pool.query("SELECT * FROM messages");
+  const { rows } = await pool.query(
+    "SELECT * FROM messages INNER JOIN users ON users.id = messages.user_id",
+  );
   return rows;
 }
 
