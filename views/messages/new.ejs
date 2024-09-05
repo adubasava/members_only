@@ -1,10 +1,22 @@
-﻿<div class="board">
-  <p>New message form</p>
-  <form method="POST" action="/messages/new">
-    <label for="title">Title: </label><br />
-    <input id="title" type="text" name="title" value="<%= title %>" /><br />
-    <label for="text">Text: </label><br />
-    <input id="text" type="text" name="text" value="<%= text %>" /><br />
-    <button class="submit" type="submit">Submit</button>
+﻿<div class="m-auto w-full max-w-xs">
+  <p class="mt-4">New message</p>
+  <form method="POST" action="/messages/new" class="form">
+    <div class="mb-4">
+      <label class="label" for="title">Title: </label>
+      <input
+        class="input"
+        id="title"
+        type="text"
+        name="title"
+        value="<%= title %>"
+      />
+    </div>
+    <div class="mb-6">
+      <label class="label" for="text">Text: </label>
+      <textarea class="input" name="text" id="text"><%= text %></textarea>
+    </div>
+    <div class="flex items-center justify-center">
+      <button class="btn" type="submit">Submit</button>
+    </div>
   </form>
 </div>

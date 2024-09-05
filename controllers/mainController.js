@@ -39,19 +39,30 @@ async function register(req, res, next) {
       email: email,
       isadmin: isadmin,
       password: password,
+      user: req.user,
     });
   }
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     await db.createUser(firstname, lastname, email, isadmin, hashedPassword);
-    res.render('login', { email: email, password: password });
+    res.render('login', { email: email, password: password, user: req.user });
   } catch (err) {
     return next(err);
   }
 }
 
 async function renderLoginForm(req, res, next) {
-  res.render('login', { email: '', password: '', user: req.user });
+  let errorMessage = '';
+  if (req.session.messages) {
+    errorMessage = req.session.messages[req.session.messages.length - 1];
+  }
+  res.render('login', {
+    email: '',
+    password: '',
+    user: req.user,
+    errorMessage: errorMessage,
+  });
+  req.session.messages = undefined;
 }
 
 async function login(req, res) {

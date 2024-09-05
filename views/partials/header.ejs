@@ -5,8 +5,10 @@
     <a href="/">Welcome to the Club</a>
     <div class="flex gap-3 text-sm">           
       <% if (user) {%>
-        <a href="/messages/new">Create a New Message</a>
-        <a href="/users/membership">Become a Member</a>        
+        <a href="/messages/new">Create New Message</a>
+        <% if (!user.status) {%>
+          <a href="/users/membership">Gain Membership</a>  
+        <% }%>               
         <a href="/log-out">LOG OUT</a>
         <% } else { %>
           <a href="/sign-up">Sign Up</a> 

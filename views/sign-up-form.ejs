@@ -1,49 +1,76 @@
-﻿<h1>Sign Up</h1>
-<form action="/sign-up" method="POST">
-  <label for="firstname">First Name</label>
-  <input
-    id="firstname"
-    name="firstname"
-    type="text"
-    value="<%= firstname %>"
-    required
-  />
-  <label for="lastname">Last Name</label>
-  <input
-    id="lastname"
-    name="lastname"
-    type="text"
-    value="<%= lastname %>"
-    required
-  />
-  <label for="email">Email</label>
-  <input
-    autocomplete="email"
-    id="email"
-    name="email"
-    type="email"
-    value="<%= email %>"
-    required
-  />
-  <label for="isadmin">Admin</label>
-  <input id="isadmin" name="isadmin" type="checkbox" />
-  <label for="password">Password</label>
-  <input
-    autocomplete="new-password"
-    id="password"
-    name="password"
-    type="password"
-    value="<%= password %>"
-    required
-  />
-  <label for="passwordConfirmation">Confirm Password</label>
-  <input
-    autocomplete="new-password"
-    id="passwordConfirmation"
-    name="passwordConfirmation"
-    type="password"
-    value="<%= password %>"
-    required
-  />
-  <button>Sign Up</button>
-</form>
+﻿<div class="m-auto w-full max-w-xs">
+  <form action="/sign-up" method="POST" class="form">
+    <div class="mb-4">
+      <label class="label" for="firstname">First Name</label>
+      <input
+        class="input"
+        id="firstname"
+        name="firstname"
+        type="text"
+        value="<%= firstname %>"
+        required
+      />
+    </div>
+    <div class="mb-4">
+      <label class="label" for="lastname">Last Name</label>
+      <input
+        class="input"
+        id="lastname"
+        name="lastname"
+        type="text"
+        value="<%= lastname %>"
+        required
+      />
+    </div>
+    <div class="mb-4">
+      <label class="label" for="email">Email</label>
+      <input
+        class="input"
+        autocomplete="email"
+        id="email"
+        name="email"
+        type="email"
+        value="<%= email %>"
+        required
+      />
+    </div>
+    <div class="mb-4">
+      <label class="block font-bold text-primary-dark md:w-2/3" for="isadmin"
+        ><input
+          class="mr-2 leading-tight"
+          id="isadmin"
+          name="isadmin"
+          type="checkbox"
+        />
+        <span class="text-base font-bold text-primary-dark"> Admin </span>
+      </label>
+    </div>
+    <div class="mb-4">
+      <label class="label" for="password">Password</label>
+      <input
+        class="input"
+        autocomplete="new-password"
+        id="password"
+        name="password"
+        type="password"
+        value="<%= password %>"
+        required
+      />
+    </div>
+    <div class="mb-6">
+      <label class="label" for="passwordConfirmation">Confirm Password</label>
+      <input
+        class="input"
+        autocomplete="new-password"
+        id="passwordConfirmation"
+        name="passwordConfirmation"
+        type="password"
+        value="<%= password %>"
+        required
+      />
+    </div>
+    <div class="flex items-center justify-center">
+      <button class="btn" type="submit">Sign up</button>
+    </div>
+  </form>
+</div>

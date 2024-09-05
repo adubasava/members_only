@@ -1,16 +1,11 @@
-﻿<h2>Join the Club</h2>
-<form action="/users/membership" method="POST">
-  <div class="form-row">
-    <div class="form-item">
-      <label class="label-secret" for="secret">Enter secret key: </label>
-      <input
-        class="secret"
-        id="secret"
-        type="password"
-        name="secret"
-        required
-      />
+﻿<div class="m-auto w-full max-w-xs">
+  <form action="/users/membership" method="POST" class="form">
+    <div class="mb-6">
+      <label class="label" for="secret">Enter secret key: </label>
+      <input class="input" id="secret" type="password" name="secret" required />
     </div>
-  </div>
-  <button>Submit</button>
-</form>
+    <div class="flex items-center justify-center">
+      <button class="btn" type="submit">Submit</button>
+    </div>
+  </form>
+</div>

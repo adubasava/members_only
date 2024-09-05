@@ -7,10 +7,10 @@ async function getMembership(req, res) {
 async function updateMembership(req, res) {
   if (req.user) {
     const { secret } = req.body;
-    console.log(req.user);
     if (secret !== process.env.SECRET) {
       return res.render('users/membership', {
         errorMessage: 'Wrong password!',
+        user: req.user,
       });
     }
     try {
@@ -24,6 +24,7 @@ async function updateMembership(req, res) {
       errorMessage: 'Login first!',
       email: '',
       password: '',
+      user: req.user,
     });
   }
 }
