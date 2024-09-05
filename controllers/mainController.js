@@ -1,6 +1,6 @@
-﻿const bcrypt = require("bcryptjs");
-const db = require("../db/queries");
-const { validationResult } = require("express-validator");
+﻿const bcrypt = require('bcryptjs');
+const db = require('../db/queries');
+const { validationResult } = require('express-validator');
 const myValidationResult = validationResult.withDefaults({
   formatter: (error) => error.msg,
 });
@@ -8,22 +8,23 @@ const myValidationResult = validationResult.withDefaults({
 async function renderIndexPage(req, res) {
   try {
     const messages = await db.getAllMessages();
-    res.render("index", { user: req.user, messages: messages });
+    res.render('index', { user: req.user, messages: messages });
   } catch {
-    res.redirect("/");
+    res.redirect('/');
   }
 }
 
 async function renderRegisterForm(req, res) {
   try {
-    res.render("sign-up-form", {
-      firstname: "",
-      lastname: "",
-      email: "",
-      password: "",
+    res.render('sign-up-form', {
+      firstname: '',
+      lastname: '',
+      email: '',
+      password: '',
+      user: req.user,
     });
   } catch {
-    res.redirect("/");
+    res.redirect('/');
   }
 }
 
@@ -31,8 +32,8 @@ async function register(req, res, next) {
   const errors = myValidationResult(req).array();
   const { firstname, lastname, email, isadmin, password } = req.body;
   if (errors.length > 0) {
-    return res.render("sign-up-form", {
-      errorMessage: errors.join(" "),
+    return res.render('sign-up-form', {
+      errorMessage: errors.join(' '),
       firstname: firstname,
       lastname: lastname,
       email: email,
@@ -43,18 +44,18 @@ async function register(req, res, next) {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     await db.createUser(firstname, lastname, email, isadmin, hashedPassword);
-    res.render("login", { email: email, password: password });
+    res.render('login', { email: email, password: password });
   } catch (err) {
     return next(err);
   }
 }
 
 async function renderLoginForm(req, res, next) {
-  res.render("login", { email: "", password: "" });
+  res.render('login', { email: '', password: '', user: req.user });
 }
 
 async function login(req, res) {
-  res.redirect("/");
+  res.redirect('/');
 }
 
 async function logout(req, res, next) {
@@ -62,7 +63,7 @@ async function logout(req, res, next) {
     if (err) {
       return next(err);
     }
-    res.redirect("/");
+    res.redirect('/');
   });
 }
 

@@ -1,0 +1,10 @@
+﻿@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Barlow Semi Condensed', sans-serif;
+    font-size: 26px;
+    background-color: hsl(210, 46%, 95%);
+    min-height: 100vh;
+  }

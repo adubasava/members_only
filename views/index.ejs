@@ -1,24 +1,22 @@
 <% if (user) {%>
-    <h1>WELCOME BACK <%= user.firstname %> <%= user.lastname %></h1>
-    <a href="/messages/new">Create a New Message</a>
-    <a href="/log-out">LOG OUT</a>
+    <h1 class="text-center mt-2">WELCOME BACK <span class="text-primary font-bold"><%= user.firstname %> <%= user.lastname %></span></h1>    
   <% } else { %>
-    <h1>please log in</h1>  
+    <h1 class="text-center p-4"><a href="/log-in">Log in</a> to see more</h1>  
     
   <%}%>
 
-  <% for (let i = 0; i < messages.length; i++) { %>
-    <div class="message-container">
-      <div class="message">
+  <div class="mx-auto grid max-w-[1000px]">
+    <% for (let i = 0; i < messages.length; i++) { %>    
+      <div class="m-4 shadow-md rounded-lg bg-primary-dark text-white px-4 py-4">
         <% if (user) {%>
-          <div class="author"> 
+          <div class="bg-violet-300 p-1"> 
             <%= messages[i].firstname %> <%= messages[i].lastname %>
           </div>
           <% }%>   
-        <h4 class="user"><%= messages[i].title %> </h4>
+        <div class="font-bold text-gray-300"><%= messages[i].title %> </div>
         <%= messages[i].text %> 
         <% if (user) {%>
-        <div class="date"> 
+        <div class="text-xs"> 
           <%= messages[i].timestamp.toLocaleString() %> 
         </div>
         <% }%>      
@@ -30,6 +28,7 @@
             onclick="return confirm('Are you sure?')">Delete</button>
           </form>          
         <% }%> 
-      <% }%>    
-    </div>
+      <% }%>   
     <% } %> 
+  </div>
+  
