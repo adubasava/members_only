@@ -42,12 +42,14 @@ app.use(express.static(__dirname + "/public"));
 
 const indexRouter = require("./routes/index");
 const userRouter = require("./routes/user");
+const messageRouter = require("./routes/message");
 
 app.use("/", indexRouter);
 app.use("/log-in", indexRouter);
 app.use("/sign-up", indexRouter);
 app.use("/sign-up", indexRouter);
 app.use("/users", userRouter);
+app.use("/messages", messageRouter);
 
 const PORT = process.env.PORT || 3000;
 

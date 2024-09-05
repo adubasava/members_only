@@ -30,19 +30,20 @@ async function renderRegisterForm(req, res) {
 
 async function register(req, res, next) {
   const errors = myValidationResult(req).array();
-  const { firstname, lastname, email, password } = req.body;
+  const { firstname, lastname, email, isadmin, password } = req.body;
   if (errors.length > 0) {
     return res.render("sign-up-form", {
       errorMessage: errors.join(" "),
       firstname: firstname,
       lastname: lastname,
       email: email,
+      isadmin: isadmin,
       password: password,
     });
   }
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    await db.createUser(firstname, lastname, email, hashedPassword);
+    await db.createUser(firstname, lastname, email, isadmin, hashedPassword);
     res.render("login", { email: email, password: password });
   } catch (err) {
     return next(err);

@@ -12,10 +12,10 @@ async function findUserById(id) {
   return rows;
 }
 
-async function createUser(firstname, lastname, email, password) {
+async function createUser(firstname, lastname, email, isadmin, password) {
   await pool.query(
-    "INSERT INTO users (firstname, lastname, email, password) VALUES ($1, $2, $3, $4)",
-    [firstname, lastname, email, password],
+    "INSERT INTO users (firstname, lastname, email, is_admin, password) VALUES ($1, $2, $3, $4, $5)",
+    [firstname, lastname, email, isadmin, password],
   );
 }
 
@@ -37,6 +37,10 @@ async function getMessageById(messageId) {
   return rows;
 }
 
+async function removeMessage(messageId) {
+  await pool.query("DELETE FROM messages WHERE message_id = $1", [messageId]);
+}
+
 async function addMessage(text, username) {
   await pool.query("INSERT INTO messages (text, username) VALUES ($1, $2)", [
     text,
@@ -52,4 +56,5 @@ module.exports = {
   getAllMessages,
   addMessage,
   getMessageById,
+  removeMessage,
 };

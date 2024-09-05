@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
    email VARCHAR ( 72 ) NOT NULL UNIQUE,
    password VARCHAR ( 255 ) NOT NULL,
    status BOOLEAN DEFAULT 'False',
-   is_admin BOOLEAN DEFAULT 'False'
+   is_admin BOOLEAN
 );
 
 CREATE TABLE IF NOT EXISTS messages (

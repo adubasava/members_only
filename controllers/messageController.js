@@ -24,9 +24,29 @@ async function addNewMessage(req, res) {
   res.redirect("/");
 }
 
+async function deleteMessage(req, res) {
+  const messageId = req.params.id;
+  const messages = await db.getAllMessages();
+  try {
+    await db.removeMessage(messageId);
+    //res.redirect("/");
+    res.render("index", {
+      user: req.user,
+      messages: messages,
+    });
+  } catch {
+    res.render("index", {
+      messages: messages,
+      user: req.user,
+      errorMessage: "Error deliting Message",
+    });
+  }
+}
+
 module.exports = {
   getMessages,
   addNewMessage,
   renderForm,
   renderMessage,
+  deleteMessage,
 };
