@@ -1,12 +1,19 @@
 ﻿<form action="/log-in" method="POST">
   <label for="email">Email</label>
-  <input id="email" name="email" autocomplete="email" type="email" />
+  <input
+    id="email"
+    name="email"
+    autocomplete="email"
+    type="email"
+    value="<%= email %>"
+  />
   <label for="current-password">Password</label>
   <input
     id="current-password"
     name="password"
     autocomplete="current-password"
     type="password"
+    value="<%= password %>"
   />
   <button type="submit">Sign in</button>
 </form>

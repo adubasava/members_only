@@ -1,17 +1,37 @@
 ﻿<h1>Sign Up</h1>
 <form action="/sign-up" method="POST">
   <label for="firstname">First Name</label>
-  <input id="firstname" name="firstname" type="text" required />
+  <input
+    id="firstname"
+    name="firstname"
+    type="text"
+    value="<%= firstname %>"
+    required
+  />
   <label for="lastname">Last Name</label>
-  <input id="lastname" name="lastname" type="text" required />
+  <input
+    id="lastname"
+    name="lastname"
+    type="text"
+    value="<%= lastname %>"
+    required
+  />
   <label for="email">Email</label>
-  <input autocomplete="email" id="email" name="email" type="email" required />
+  <input
+    autocomplete="email"
+    id="email"
+    name="email"
+    type="email"
+    value="<%= email %>"
+    required
+  />
   <label for="password">Password</label>
   <input
     autocomplete="new-password"
     id="password"
     name="password"
     type="password"
+    value="<%= password %>"
     required
   />
   <label for="passwordConfirmation">Confirm Password</label>
@@ -20,6 +40,7 @@
     id="passwordConfirmation"
     name="passwordConfirmation"
     type="password"
+    value="<%= password %>"
     required
   />
   <button>Sign Up</button>
